@@ -8,6 +8,6 @@ export const envUtils = {
   },
 
   convertToArray(value: string): Array<string> {
-    return value.split(',').map((item) => item.trim());
+    return value?.split(',').map((item) => item.trim());
   },
 };
