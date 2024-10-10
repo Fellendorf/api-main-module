@@ -1,17 +1,20 @@
 export interface Question {
   topic: string;
   text: string;
-  code?: {
-    text: string;
-    language: Language;
-  };
+  code?: Code;
   options: string[];
-  answer: {
-    index: number;
-    explanation?: string;
-  };
-  userAnswer?: number | null;
+  answer: Answer;
+}
+
+export interface Code {
+  text: string;
+  language: Language;
+}
+
+export interface Answer {
+  index: number;
+  explanation?: string;
 }
 
 export const languages = ['typescript', 'javascript', 'html', 'css'] as const;
-type Language = (typeof languages)[number];
+export type Language = (typeof languages)[number];

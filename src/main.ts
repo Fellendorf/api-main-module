@@ -11,7 +11,12 @@ const CORS_ORIGIN = envUtils.convertToArray(process.env.CORS_ORIGIN) || '*';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {});
   app.setGlobalPrefix('api/v1');
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true, // to use class-transform package features
+      whitelist: true, // to only transform provided properties
+    }),
+  );
   if (CORS_ENABLED) {
     app.enableCors({ origin: CORS_ORIGIN });
   }
