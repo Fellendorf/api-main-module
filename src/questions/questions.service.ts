@@ -12,6 +12,11 @@ type QuestionFilter = {
   };
 };
 
+type Topic = {
+  name: string;
+  questionCount: number;
+};
+
 @Injectable()
 export class QuestionsService {
   constructor(
@@ -33,11 +38,15 @@ export class QuestionsService {
     ]);
   }
 
-  public async getTopics(): Promise<string[]> {
-    return this.questionModel.aggregate([
-      { $group: { _id: '$topic', count: { $count: {} } } },
-      { $project: { _id: 0, name: '$_id', questionCount: '$count' } },
-    ]);
+  public async getTopics(): Promise<Topic[]> {
+    return this.questionModel
+      .aggregate([
+        { $group: { _id: '$topic', count: { $count: {} } } },
+        { $project: { _id: 0, name: '$_id', questionCount: '$count' } },
+      ])
+      .then((topics: Topic[]) =>
+        topics.sort((a, b) => a.name.localeCompare(b.name)),
+      );
   }
 
   public async createQuestion(
