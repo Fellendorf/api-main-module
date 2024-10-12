@@ -34,7 +34,10 @@ export class QuestionsService {
   }
 
   public async getTopics(): Promise<string[]> {
-    return this.questionModel.distinct('topic');
+    return this.questionModel.aggregate([
+      { $group: { _id: '$topic', count: { $count: {} } } },
+      { $project: { _id: 0, name: '$_id', questionCount: '$count' } },
+    ]);
   }
 
   public async createQuestion(
