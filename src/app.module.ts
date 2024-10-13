@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
+import { QuestionsModule } from '@fellendorf/api-quiz-questions-module';
 import { mongoUtils } from './utils/mongo.utils';
-import { QuestionsModule } from './questions/questions.module';
 
 @Module({
   imports: [
