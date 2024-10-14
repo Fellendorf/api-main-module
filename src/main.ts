@@ -13,8 +13,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
   app.useGlobalPipes(
     new ValidationPipe({
-      transform: true, // to use class-transform package features
-      whitelist: true, // to only transform provided properties
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
+      whitelist: true,
+      forbidNonWhitelisted: true,
     }),
   );
   if (CORS_ENABLED) {
