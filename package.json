@@ -19,7 +19,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@fellendorf/api-quiz-questions-module": "^1.3.4",
+    "@fellendorf/api-quiz-questions-module": "^1.4.3",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.3",
