@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
 import { QuestionsModule } from '@fellendorf/api-quiz-questions-module';
+import { AuthModule } from '@fellendorf/api-quiz-auth-module';
 import { mongoUtils } from './utils/mongo.utils';
 
 @Module({
@@ -12,6 +13,7 @@ import { mongoUtils } from './utils/mongo.utils';
     }),
     MongooseModule.forRoot(mongoUtils.getMongoUrl(process.env)),
     QuestionsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
