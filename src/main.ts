@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { urlencoded, json } from 'express';
+
+import { AppModule } from './app.module';
 import { envUtils } from './utils/env.utils';
 
 const PORT = envUtils.convertToNumber(process.env.PORT) || 3000;
@@ -19,6 +21,8 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
   if (CORS_ENABLED) {
     app.enableCors({ origin: CORS_ORIGIN });
   }
